@@ -49,7 +49,7 @@ if uploaded_file is not None:
     
     
     # Define the parameter columns for line charts
-    parameter_columns = ['Distance', 'Calories', 'Max HR', 'Avg HR', 'Avg Pace', 'Aerobic TE']
+    parameter_columns = ['Max HR', 'Avg HR', 'Avg Pace']
 
     # Display line charts for monthly averages of selected parameters
     functions.monthly_average_line_charts(df, 'Date', parameter_columns)
