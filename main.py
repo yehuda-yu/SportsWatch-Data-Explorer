@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import seaborn as sns
 from scipy import stats
-import Garmin_functions
+import functions
 
 # Define the color palette
 color_palette = ["#21b0fe", "#fed700", "#fe218b"]
@@ -33,15 +33,15 @@ if uploaded_file is not None:
     # Read CSV file into a DataFrame
     df = pd.read_csv(uploaded_file)
 
-    # Clean the data using Garmin_functions
-    df = Garmin_functions.clean_running_data(df)
+    # Clean the data using functions
+    df = functions.clean_running_data(df)
 
     # Display the cleaned DataFrame
     st.subheader("2.Data Overview")
 
     st.dataframe(df)
     with st.expander("Explain the meaning and units of each parameter in the data"):
-        Garmin_functions.show_parameters_table()
+        functions.show_parameters_table()
     
     # Section: Visualizations
     st.markdown("""---""")
@@ -52,7 +52,7 @@ if uploaded_file is not None:
     parameter_columns = ['Distance', 'Calories', 'Max HR', 'Avg HR', 'Avg Pace', 'Aerobic TE']
 
     # Display line charts for monthly averages of selected parameters
-    Garmin_functions.monthly_average_line_charts(df, 'Date', parameter_columns)
+    functions.monthly_average_line_charts(df, 'Date', parameter_columns)
     
     
     st.markdown("""### Select your own visualization""")
@@ -80,16 +80,16 @@ if uploaded_file is not None:
     # Plot the interval statistics if the button is clicked
     if st.button("Plot Visualizations"):
         st.subheader("Interval Statistics")
-        Garmin_functions.plot_interval_statistics(df, column_name, interval, calculation)
+        functions.plot_interval_statistics(df, column_name, interval, calculation)
 
         st.subheader("Distribution with Average")
-        Garmin_functions.plot_distribution_with_average(df, column_name)
+        functions.plot_distribution_with_average(df, column_name)
 
         st.subheader("Day vs. Night Performance")
-        Garmin_functions.compare_day_night_performance(df, column_name)
+        functions.compare_day_night_performance(df, column_name)
 
         st.subheader("Highest Performance Hour")
-        Garmin_functions.find_highest_performance_hour(df, column_name)
+        functions.find_highest_performance_hour(df, column_name)
 
 # Section: Report
 st.markdown("""---""")
@@ -115,24 +115,24 @@ if uploaded_file is not None:
             Garmin_functions.check_heart_rate_normal(average_last_year, max_last_year, age, gender)
 
             st.write("Your last month heart rates:")
-            Garmin_functions.check_heart_rate_normal(average_last_month, max_last_month, age, gender)
+            functions.check_heart_rate_normal(average_last_month, max_last_month, age, gender)
 
     # Duration Distribution Expander
     with st.expander("Check Stride and Cadence"):
         st.subheader("Stride and Cadence")
-        Garmin_functions.analyse_Cadence_Stride(df)
+        functions.analyse_Cadence_Stride(df)
 
     # Duration Distribution Expander
     with st.expander("Check Duration"):
         st.subheader("Duration")
-        Garmin_functions.analyze_activity_duration(df,'Time')
+        functions.analyze_activity_duration(df,'Time')
         
     # Duration Distribution Expander
     with st.expander("Check Temperature Effect"):
         st.subheader("Temperature Effect")
-        Garmin_functions.analyze_temperature_impact(df, 'Max Temp', 'Min Temp', 'Avg Pace', 'Avg HR', 'Max HR')
+        functions.analyze_temperature_impact(df, 'Max Temp', 'Min Temp', 'Avg Pace', 'Avg HR', 'Max HR')
   
     # Records Expander
     with st.expander("Check Your Records"):
         st.subheader("Records")
-        Garmin_functions.identify_personal_records(df)
+        functions.identify_personal_records(df)
