@@ -9,4 +9,4 @@ Yehuda Yungstein
 ## Disclaimer
 The SportsWatch Data Explorer app is provided for informational and educational purposes only. It relies on user-uploaded data, and users are responsible for ensuring the accuracy and legality of the data they provide. The app's authors and contributors are not liable for any misuse, misinterpretation, or damages resulting from the use of this app or the data provided by users.
 
-**I am not a professional in the field of health and sports!** My goal is to make the information accessible and reflect you. It is always recommended to consult a professional and take the recommendations with limited liability**I am not a professional in the field of health and sports!** My goal is to make the information accessible and reflect you. It is always recommended to consult a professional and take the recommendations with limited liability
+**I am not a professional in the field of health and sports!** My goal is to make the information accessible and reflect you. It is always recommended to consult a professional and take the recommendations with limited liability.
