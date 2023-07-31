@@ -6,6 +6,9 @@ This app aims to empower users to optimize their training, understand performanc
 ## Author
 Yehuda Yungstein
 
+- [mail address](yehudayu@gmail.com)
+- [Linkedin profile](https://www.linkedin.com/in/yehuda-yungstein/)
+
 ## Disclaimer
 The SportsWatch Data Explorer app is provided for informational and educational purposes only. It relies on user-uploaded data, and users are responsible for ensuring the accuracy and legality of the data they provide. The app's authors and contributors are not liable for any misuse, misinterpretation, or damages resulting from the use of this app or the data provided by users.
 
