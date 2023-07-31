@@ -68,6 +68,7 @@ def monthly_average_line_charts(df, date_column, parameter_columns):
     except Exception as e:
         st.error("An error occurred while processing the data:")
         st.error(str(e))
+
 def show_parameters_table():
     
     """
