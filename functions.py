@@ -34,11 +34,12 @@ def monthly_average_line_charts(df, date_column, parameter_columns):
     try:
         # Set the date_column as the DataFrame index
         df1 = df.set_index(date_column)
-
+        st.write("1")
         # Resample the DataFrame at a monthly frequency and calculate the monthly average for each parameter
         df_monthly_avg = df1.resample('M').mean()
+        st.write("2")
         df_monthly_avg['Date_Col'] = df_monthly_avg.index.values
-
+        st.write("3")
         # Create a sidebar for selecting the time range
         st.sidebar.subheader("Select Time Range")
         start_date = st.sidebar.date_input("Start date", value=df1.index.min())
