@@ -3,6 +3,6 @@ pandas
 datetime
 numpy
 matplotlib
-import seaborn
+seaborn
 scipy
 plotly
