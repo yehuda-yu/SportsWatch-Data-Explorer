@@ -112,7 +112,7 @@ if uploaded_file is not None:
         if st.button("Check Heart Rates"):
             st.subheader("Heart Rate Analysis Results")
             st.write("Your last year heart rates:")
-            Garmin_functions.check_heart_rate_normal(average_last_year, max_last_year, age, gender)
+            functions.check_heart_rate_normal(average_last_year, max_last_year, age, gender)
 
             st.write("Your last month heart rates:")
             functions.check_heart_rate_normal(average_last_month, max_last_month, age, gender)
