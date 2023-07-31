@@ -1,4 +1,4 @@
-# SportsWatch Data Explorer - Streamlit App
+# SportsWatch Data Explorer App
 ## Overview
 The SportsWatch Data Explorer is a Streamlit app that provides runners and fitness enthusiasts with a user-friendly platform to display, analyze, and gain insights from their running data collected from sports watches. 
 This app aims to empower users to optimize their training, understand performance trends, and make data-driven decisions to achieve their fitness goals.
