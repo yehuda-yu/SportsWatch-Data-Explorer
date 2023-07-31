@@ -12,6 +12,8 @@ from matplotlib.ticker import MaxNLocator
 import seaborn as sns
 from scipy import stats
 import functions
+import plotly.express as px
+import plotly.graph_objs as go
 
 # Define the color palette
 color_palette = ["#21b0fe", "#fed700", "#fe218b"]
