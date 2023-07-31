@@ -21,57 +21,6 @@ sns.set_theme(style="white",font_scale = 1.5,palette = color_palette)
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = ['Arial'] + plt.rcParams['font.serif']
 
-
-def show_parameters_table():
-    
-    """
-    Show the the meaning and units of each parameter
-    """
-    table =     st.markdown('''
-                | Parameter | Meaning | Units |
-                |---|---|---|
-                | Activity Type | The type of activity, such as running, cycling, or swimming | - |
-                | Date | The date of the activity | - |
-                | Favorite | Whether the activity is marked as a favorite | Boolean |
-                | Title | The title of the activity | - |
-                | Distance | The distance traveled in the activity | meters |
-                | Calories | The number of calories burned in the activity | calories |
-                | Time | The total time of the activity | seconds |
-                | Avg HR | The average heart rate during the activity | beats per minute |
-                | Max HR | The maximum heart rate during the activity | beats per minute |
-                | Aerobic TE | The aerobic training effect of the activity | - |
-                | Avg Run Cadence | The average cadence (steps per minute) during the activity | steps per minute |
-                | Max Run Cadence | The maximum cadence during the activity | steps per minute |
-                | Avg Pace | The average pace (minutes per kilometer) during the activity | minutes per kilometer |
-                | Best Pace | The best pace (minutes per kilometer) during the activity | minutes per kilometer |
-                | Total Ascent | The total ascent in meters during the activity | meters |
-                | Total Descent | The total descent in meters during the activity | meters |
-                | Avg Stride Length | The average stride length in meters during the activity | meters |
-                | Avg Vertical Ratio | The average vertical ratio during the activity | - |
-                | Avg Vertical Oscillation | The average vertical oscillation during the activity | meters |
-                | Avg Ground Contact Time | The average ground contact time in milliseconds during the activity | milliseconds |
-                | Training Stress Score® | The training stress score of the activity | - |
-                | Avg Power | The average power output during the activity | watts |
-                | Max Power | The maximum power output during the activity | watts |
-                | Grit | The grit of the activity | - |
-                | Flow | The flow of the activity | - |
-                | Avg. Swolf | The average swolf score during the activity | - |
-                | Avg Stroke Rate | The average stroke rate during the activity | strokes per minute |
-                | Total Reps | The total number of repetitions during the activity | - |
-                | Dive Time | The total dive time during the activity | seconds |
-                | Min Temp | The minimum temperature during the activity | degrees Celsius |
-                | Surface Interval | The total surface interval time during the activity | seconds |
-                | Decompression | The total decompression time during the activity | seconds |
-                | Best Lap Time | The best lap time during the activity | seconds |
-                | Number of Laps | The number of laps during the activity | - |
-                | Max Temp | The maximum temperature during the activity | degrees Celsius |
-                | Moving Time | The time spent moving during the activity | seconds |
-                | Elapsed Time | The total elapsed time of the activity | seconds |
-                | Min Elevation | The minimum elevation during the activity | meters |
-                | Max Elevation | The maximum elevation during the activity | meters |
-                ''')
-    return table
-
 def clean_running_data(df):
     """
     Clean and preprocess running data from a DataFrame by convert to int/float/datetime formats.
@@ -154,6 +103,55 @@ def clean_running_data(df):
         st.error(f"An error occurred while cleaning the running data: {e}")
         return None
 
+def show_parameters_table():    
+    """
+    Show the the meaning and units of each parameter
+    """
+    table =     st.markdown('''
+                | Parameter | Meaning | Units |
+                |---|---|---|
+                | Activity Type | The type of activity, such as running, cycling, or swimming | - |
+                | Date | The date of the activity | - |
+                | Favorite | Whether the activity is marked as a favorite | Boolean |
+                | Title | The title of the activity | - |
+                | Distance | The distance traveled in the activity | meters |
+                | Calories | The number of calories burned in the activity | calories |
+                | Time | The total time of the activity | seconds |
+                | Avg HR | The average heart rate during the activity | beats per minute |
+                | Max HR | The maximum heart rate during the activity | beats per minute |
+                | Aerobic TE | The aerobic training effect of the activity | - |
+                | Avg Run Cadence | The average cadence (steps per minute) during the activity | steps per minute |
+                | Max Run Cadence | The maximum cadence during the activity | steps per minute |
+                | Avg Pace | The average pace (minutes per kilometer) during the activity | minutes per kilometer |
+                | Best Pace | The best pace (minutes per kilometer) during the activity | minutes per kilometer |
+                | Total Ascent | The total ascent in meters during the activity | meters |
+                | Total Descent | The total descent in meters during the activity | meters |
+                | Avg Stride Length | The average stride length in meters during the activity | meters |
+                | Avg Vertical Ratio | The average vertical ratio during the activity | - |
+                | Avg Vertical Oscillation | The average vertical oscillation during the activity | meters |
+                | Avg Ground Contact Time | The average ground contact time in milliseconds during the activity | milliseconds |
+                | Training Stress Score® | The training stress score of the activity | - |
+                | Avg Power | The average power output during the activity | watts |
+                | Max Power | The maximum power output during the activity | watts |
+                | Grit | The grit of the activity | - |
+                | Flow | The flow of the activity | - |
+                | Avg. Swolf | The average swolf score during the activity | - |
+                | Avg Stroke Rate | The average stroke rate during the activity | strokes per minute |
+                | Total Reps | The total number of repetitions during the activity | - |
+                | Dive Time | The total dive time during the activity | seconds |
+                | Min Temp | The minimum temperature during the activity | degrees Celsius |
+                | Surface Interval | The total surface interval time during the activity | seconds |
+                | Decompression | The total decompression time during the activity | seconds |
+                | Best Lap Time | The best lap time during the activity | seconds |
+                | Number of Laps | The number of laps during the activity | - |
+                | Max Temp | The maximum temperature during the activity | degrees Celsius |
+                | Moving Time | The time spent moving during the activity | seconds |
+                | Elapsed Time | The total elapsed time of the activity | seconds |
+                | Min Elevation | The minimum elevation during the activity | meters |
+                | Max Elevation | The maximum elevation during the activity | meters |
+                ''')
+    return table
+
 def monthly_average_line_charts(df, date_column, parameter_columns):
     """
     Display monthly average line charts for the specified parameters over time.
@@ -165,7 +163,7 @@ def monthly_average_line_charts(df, date_column, parameter_columns):
     """
     try:
         # Set the date_column as the DataFrame index
-        df1 = df.set_index(date_column)
+        df1 = df[['Date','Distance', 'Calories', 'Max HR', 'Avg HR', 'Avg Pace', 'Aerobic TE']].set_index(date_column)
         st.write("1")
         # Resample the DataFrame at a monthly frequency and calculate the monthly average for each parameter
         df_monthly_avg = df1.resample('M').mean()
