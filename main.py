@@ -57,7 +57,7 @@ if uploaded_file is not None:
     
     st.markdown("""### Select your own visualization""")
     # Select column name
-    column_name = st.selectbox("Select a parameter to visualize", df.columns,)
+    column_name = st.selectbox("Select a parameter to visualize", df.columns,4)
 
     # Define interval options with user-friendly labels
     interval_options = {
