@@ -6,7 +6,7 @@ This app aims to empower users to optimize their training, understand performanc
 ## Author
 Yehuda Yungstein
 
-- [mail address](yehudayu@gmail.com)
+- [Mail address](yehudayu@gmail.com)
 - [Linkedin profile](https://www.linkedin.com/in/yehuda-yungstein/)
 
 ## Disclaimer
