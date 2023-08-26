@@ -131,7 +131,7 @@ if uploaded_file is not None:
         
     # Duration Distribution Expander
     with st.expander("Check Temperature Effect"):
-        st.subheader("Temperature Effect")
+        st.markdown(""" ### Temperature Effect """)
         functions.analyze_temperature_impact(df, 'Max Temp', 'Min Temp', 'Avg Pace', 'Avg HR', 'Max HR')
   
     # Records Expander
