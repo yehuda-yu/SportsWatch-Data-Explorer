@@ -154,57 +154,57 @@ def show_parameters_table():
 
 @st.experimental_memo
 def get_chart(df,parameter):
-"""
-Create line plot with Plotly
-"""
-# Create a line chart for the current parameter
-fig = px.line(df, x=df_filtered.index, y=parameter, title=f"{parameter} Over Time")
-
-# Add a range slider to the graph
-fig.update_layout(xaxis=dict(rangeslider=dict(visible=True)))
-
-# Add buttons to the graph that allow the user to select the time range
-fig.update_layout(
-    updatemenus=[
-        dict(
-            type="buttons",
-            direction="right",
-            active=0,
-            buttons=list([
-                dict(
-                    label="Last Week",
-                    method="update",
-                    args=[{"visible": [True if (df.index.max() - pd.Timedelta(days=7)) <= d <= df.index.max() else False for d in df.index]}]
-                ),
-                dict(
-                    label="Last Month",
-                    method="update",
-                    args=[{"visible": [True if (df.index.max() - pd.Timedelta(days=30)) <= d <= df.index.max() else False for d in df.index]}]
-                ),
-                dict(
-                    label="Last 6 Months",
-                    method="update",
-                    args=[{"visible": [True if (df.index.max() - pd.Timedelta(days=180)) <= d <= df.index.max() else False for d in df.index]}]
-                ),
-                dict(
-                    label="Last Year",
-                    method="update",
-                    args=[{"visible": [True if (df.index.max() - pd.Timedelta(days=365)) <= d <= df.index.max() else False for d in df.index]}]
-                ),
-                dict(
-                    label="All Data",
-                    method="update",
-                    args=[{"visible": [True for d in df.index]}]
-                )
-            ])
-        )
-    ]
-)
-
-# If the selected time range is greater than or equal to six months, add a second line to the graph that represents the monthly average for the selected parameter
-if (end_date - start_date).days >= 180:
-    fig.add_trace(go.Scatter(x=df_monthly_avg['Date_Col'], y=df_monthly_avg[parameter], mode='lines', name='Monthly Average', line=dict(color='red')))
-return (fig)
+    """
+    Create line plot with Plotly
+    """
+    # Create a line chart for the current parameter
+    fig = px.line(df, x=df_filtered.index, y=parameter, title=f"{parameter} Over Time")
+    
+    # Add a range slider to the graph
+    fig.update_layout(xaxis=dict(rangeslider=dict(visible=True)))
+    
+    # Add buttons to the graph that allow the user to select the time range
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="right",
+                active=0,
+                buttons=list([
+                    dict(
+                        label="Last Week",
+                        method="update",
+                        args=[{"visible": [True if (df.index.max() - pd.Timedelta(days=7)) <= d <= df.index.max() else False for d in df.index]}]
+                    ),
+                    dict(
+                        label="Last Month",
+                        method="update",
+                        args=[{"visible": [True if (df.index.max() - pd.Timedelta(days=30)) <= d <= df.index.max() else False for d in df.index]}]
+                    ),
+                    dict(
+                        label="Last 6 Months",
+                        method="update",
+                        args=[{"visible": [True if (df.index.max() - pd.Timedelta(days=180)) <= d <= df.index.max() else False for d in df.index]}]
+                    ),
+                    dict(
+                        label="Last Year",
+                        method="update",
+                        args=[{"visible": [True if (df.index.max() - pd.Timedelta(days=365)) <= d <= df.index.max() else False for d in df.index]}]
+                    ),
+                    dict(
+                        label="All Data",
+                        method="update",
+                        args=[{"visible": [True for d in df.index]}]
+                    )
+                ])
+            )
+        ]
+    )
+    
+    # If the selected time range is greater than or equal to six months, add a second line to the graph that represents the monthly average for the selected parameter
+    if (end_date - start_date).days >= 180:
+        fig.add_trace(go.Scatter(x=df_monthly_avg['Date_Col'], y=df_monthly_avg[parameter], mode='lines', name='Monthly Average', line=dict(color='red')))
+    return (fig)
 
 def monthly_average_line_charts(df, date_column, parameter_columns):
     """
