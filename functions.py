@@ -531,7 +531,7 @@ def analyze_activity_duration(df, duration_column):
         df_minutes[duration_column] = pd.to_timedelta(df_minutes[duration_column])
         df_minutes[duration_column] = df_minutes[duration_column].dt.total_seconds() / 60
 
-        st.table(df_minutes)
+        st.dataframe(df_minutes.head())
 
         # Create a histogram using Plotly
         fig = px.histogram(df_minutes, x=duration_column, nbins=20, labels={'x': 'Activity Duration (minutes)', 'y': 'Frequency'},
