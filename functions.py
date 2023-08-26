@@ -540,7 +540,7 @@ def analyze_activity_duration(df, duration_column):
         fig.update_layout(showlegend=False)
       
         # Display the histogram using st.plotly_chart
-        # st.plotly_chart(fig)
+        st.plotly_chart(fig)
         
         # Calculate summary statistics using df_minutes
         avg_duration = df_minutes[duration_column].mean()
