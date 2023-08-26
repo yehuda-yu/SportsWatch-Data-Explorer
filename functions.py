@@ -439,9 +439,8 @@ def find_highest_performance_hour(df, parameter):
         return None, None, None, None
 
 def check_heart_rate_normal(average_rate, max_rate, age, gender):
-    
-    try:
         
+    try:      
         data = {'Age': [20, 20, 30, 30, 35, 35, 40, 40, 45, 45, 50, 50, 55, 55, 60, 60, 65, 65, 70, 70],
             'Gender': ['Male', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female'],
             'Normal Heart Rate (bpm)': ['60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100', '60-100'],
@@ -474,7 +473,7 @@ def check_heart_rate_normal(average_rate, max_rate, age, gender):
         # Display the results in a table
         st.table(pd.DataFrame(results))
     except Exception as e:
-       st.error(f"An error occurred while checking heart rate normal: {e}")
+        st.error(f"An error occurred while checking heart rate normal: {e}")
        
 
 def analyse_Cadence_Stride(df):
