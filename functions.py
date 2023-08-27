@@ -540,7 +540,7 @@ def analyze_activity_duration(df, duration_column):
                            title='Distribution of Activity Durations',)
         
         # Add a vertical line for the mean duration
-        fig.add_vline(x=mean_duration, line_dash="dash", line_color="#fed700",
+        fig.add_vline(x=mean_duration, line_dash="dash", line_color="#fe218b",
                       annotation_text=f"Mean: {mean_duration:.2f} min", annotation_position="top")
 
         # Set the color of the histogram
