@@ -98,9 +98,6 @@ if uploaded_file is not None:
         st.subheader("Day vs. Night Performance")
         functions.compare_day_night_performance(df, column_name)
 
-        st.subheader("Highest Performance Hour")
-        functions.find_highest_performance_hour(df, column_name)
-
 # Section: Report
 st.markdown("""---""")
 st.subheader('4. Report - Analysis & Recommendations')
