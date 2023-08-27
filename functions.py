@@ -554,7 +554,7 @@ def plot_correlation_heatmap(df, temperature_columns):
         # Create a DataFrame containing selected columns and the columns with high correlations
         selected_columns = temperature_columns + high_correlations.index.tolist()
         selected_corr = correlations[selected_columns]
-        st.dataframe(selected_corr)
+        st.dataframe(selected_corr[selected_corr.columns[:1]])
 
         # Plot heatmap
         fig, ax = plt.subplots(figsize=(15, 15))
