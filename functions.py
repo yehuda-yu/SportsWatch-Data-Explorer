@@ -551,13 +551,12 @@ def plot_correlation_heatmap(df, temperature_columns):
         # Filter correlations > 0.5 for the temperature columns
         high_correlations = correlations[temperature_columns].abs().max() > 0.5
 
-         # Drop duplicate columns
-        high_correlations = high_correlations.loc[:, ~high_correlations.columns.duplicated()]
-
         # Create a DataFrame containing selected columns and the columns with high correlations
         selected_columns = temperature_columns + high_correlations.index.tolist()
         selected_corr = correlations[selected_columns]
-        st.dataframe(selected_corr[selected_corr.columns[:1]])
+
+        # Drop duplicate columns
+        selected_corr = selected_corr.loc[:, ~selected_corr.columns.duplicated()]
 
         # Plot heatmap
         fig, ax = plt.subplots(figsize=(15, 15))
