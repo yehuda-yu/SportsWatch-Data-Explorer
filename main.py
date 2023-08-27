@@ -8,6 +8,7 @@ Created on Wed Jun 28 21:39:06 2023
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.switch_backend("Agg")
 from matplotlib.ticker import MaxNLocator
 import seaborn as sns
 from scipy import stats
