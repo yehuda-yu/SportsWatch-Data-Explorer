@@ -144,7 +144,7 @@ if uploaded_file is not None:
         st.write("display a correlation heatmap for the selected temperature column and highly correlated columns.")
         
         #plot heatmap of correlations 
-        functions.plot_correlation_heatmap(df, ['Max Temp'. 'Min Temp'])
+        functions.plot_correlation_heatmap(df, ['Max Temp', 'Min Temp'])
         
   
     # Records Expander
