@@ -533,7 +533,7 @@ def analyze_temperature_impact(df, max_temp_column, min_temp_column, pace_column
         st.error("An error occurred while processing the data:")
         st.error(str(e))
 
-def plot_correlation_numeric(df, temperature_column):
+def plot_correlation_temperature(df, temperature_column):
     """
     Calculate Spearman correlations and plot a heatmap of correlations > 0.5 for the temperature column and numeric columns.
 
