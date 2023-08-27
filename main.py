@@ -51,6 +51,8 @@ if uploaded_file is not None:
     
     
     # Define the parameter columns for line charts
+    st.write(df.columns)
+
     columns = df[['Distance', 'Calories', 'Avg HR', 'Max HR', 'Aerobic TE', 'Avg Run Cadence',
        'Max Run Cadence', 'Avg Pace', 'Best Pace', 'Total Ascent',
        'Total Descent', 'Avg Stride Length', 'Avg Vertical Ratio',
