@@ -298,7 +298,7 @@ def plot_distribution_with_average(df, column_name):
     except Exception as e:
         st.error(f"An error occurred while plotting distribution with average: {e}")
     
-def compare_day_night_performance(df, parameter, night_threshold = "19:00"):
+def compare_day_night_performance(df, parameter, night_threshold="19:00"):
     """
     Compare the performance of a parameter between day and night using a t-test
     and generate boxplots to visualize the parameter distribution.
@@ -311,41 +311,47 @@ def compare_day_night_performance(df, parameter, night_threshold = "19:00"):
     try:
         # Convert 'Date' column to datetime
         df['Date'] = pd.to_datetime(df['Date'])
-    
+
         # Categorize data into day and night based on the threshold
         df['Day/Night'] = df['Date'].apply(lambda x: 'Night' if x.time() >= pd.to_datetime(night_threshold).time() else 'Day')
         day_data = df[df['Day/Night'] == 'Day'][parameter]
         night_data = df[df['Day/Night'] == 'Night'][parameter]
-    
+
         # Perform t-test
         t_statistic, p_value = stats.ttest_ind(day_data, night_data)
-     
+
         # plot
         fig, ax = plt.subplots(figsize=(10, 6))
-        ax = sns.boxplot(x=df['Day/Night'], y=df[parameter],showfliers = False)
-    
+        ax = sns.boxplot(x=df['Day/Night'], y=df[parameter], showfliers=False)
+
         # Set plot labels and title
         ax.set_xlabel('Day/Night')
         ax.set_ylabel(parameter)
         ax.set_title('Comparison of ' + parameter + ' between Day and Night')
-        
+
         # Add t-test results to the plot
         plt.text(0.5, 0.9, f"P-Value: {p_value:.4f}", ha='center', va='center', transform=plt.gca().transAxes)
-            # Add mean values to the plot
+        # Add mean values to the plot
         day_mean = day_data.mean()
         night_mean = night_data.mean()
         ax.text(0.1, day_mean, f"{day_mean:.2f}", ha='right', va='center', fontweight='bold')
         ax.text(0.9, night_mean, f"{night_mean:.2f}", ha='left', va='center', fontweight='bold')
-    
+
         # Configure x-axis tick labels
         ax.xaxis.set_major_locator(MaxNLocator(nbins='auto', min_n_ticks=5, integer=True))
         plt.xticks(rotation=45, ha='right')
-        
+
         # Display the plot in Streamlit
         st.pyplot(fig)
+
+        # Display the comparison result
+        if p_value < 0.05:
+            st.write("There is a significant difference between day and night performance.")
+        else:
+            st.write("There is no significant difference between day and night performance.")
+
     except Exception as e:
         st.error(f"An error occurred while comparing day-night performance: {e}")
-
 
 def check_heart_rate_normal(average_rate, max_rate, age, gender):
         
