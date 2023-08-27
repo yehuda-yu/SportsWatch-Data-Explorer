@@ -555,8 +555,7 @@ def plot_correlation_temperature(df, temperature_column):
         # Customize the heatmap appearance
         fig.update_layout(title_text="Spearman Correlation Heatmap (Correlations > 0.5)")
         
-        # Display the heatmap using st.plotly_chart
-        st.plotly_chart(fig)
+        return fig
 
     except Exception as e:
         print("An error occurred while processing the data:")
