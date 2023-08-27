@@ -548,11 +548,13 @@ def plot_correlation_temperature(df, temperature_column):
         high_correlations = correlations[correlations[temperature_column].abs() > 0.5]
 
         # Plot heatmap
-        fig, ax = plt.subplots(figsize=(10, 8))
-        ax = sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
+                # Create the bar plot
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
         ax.set_title("Spearman Correlation Heatmap (Correlations > 0.5)")
-        
-        return fig
+
+        # Display the plot in Streamlit
+        st.pyplot(fig)
 
     except Exception as e:
         print("An error occurred while processing the data:")
