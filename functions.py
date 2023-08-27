@@ -548,6 +548,8 @@ def plot_correlation_temperature(df, temperature_column):
         # Filter correlations > 0.5
         high_correlations = correlations[correlations[temperature_column].abs() > 0.5]
 
+        st.write(high_correlations)
+
         # Plot heatmap
         fig, ax = plt.subplots(figsize=(10, 6))
         sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
