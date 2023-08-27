@@ -159,8 +159,8 @@ def get_chart(df,parameter):
     """
 
     # Define line plot
-    fig = px.line(df, x="DATE", y=parameter,
-                      hover_data={"DATE": "|%B %d, %Y"},
+    fig = px.line(df, x="Date", y=parameter,
+                      hover_data={"Date": "|%B %d, %Y"},
                       color_discrete_sequence=['#21b0fe'],
                       title=F'Time Series of {parameter}')
     
