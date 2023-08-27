@@ -563,7 +563,7 @@ def plot_correlation_heatmap(df, temperature_columns):
 
         # Check if only temperature columns are selected
         if selected_corr.shape[1] == len(temperature_columns):
-            st.write("There is no significant correlation between performance and temperature columns.")
+            st.write("There is no significant correlation between performance and temperature.")
         else:
             # Plot heatmap if there are significant correlations
             if not selected_corr.empty:
@@ -574,7 +574,7 @@ def plot_correlation_heatmap(df, temperature_columns):
                 # Display the plot in Streamlit
                 st.pyplot(fig)
             else:
-                st.write("There is no significant correlation between performance and temperature columns.")
+                st.write("There is no significant correlation between performance and temperature.")
 
     except Exception as e:
         st.error("An error occurred while processing the data:")
