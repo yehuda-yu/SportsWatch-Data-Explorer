@@ -29,7 +29,7 @@ st.title("Garmin Running Visualization and Insights")
 
 # Section: File Upload
 st.subheader("1. Upload Data")
-use_sample_data = st.checkbox("Use Sample Data")
+use_sample_data = st.checkbox("Use Example Data")
 uploaded_file = None
 if not use_sample_data:
     uploaded_file = st.file_uploader("Upload a CSV file with your running data", type="csv")
@@ -104,8 +104,8 @@ if use_sample_data or uploaded_file is not None:
         functions.compare_day_night_performance(df, column_name)
 
 # Section: Report
-st.markdown("""---""")
-st.subheader('4. Report - Analysis & Recommendations')
+st.markdown("---")
+st.subheader("4. Report - Analysis & Recommendations")
 if use_sample_data or uploaded_file is not None:
     
     # Heart Rate Analysis Expander
@@ -154,3 +154,41 @@ if use_sample_data or uploaded_file is not None:
     with st.expander("Check Your Records"):
         st.subheader("Records")
         functions.identify_personal_records(df)
+
+
+# Credits
+st.markdown("**Developed by**: Yehuda Yungstein")
+
+# Set symbols and links 
+st.markdown(
+    """
+    <style>
+        div[data-testid="column"]:nth-of-type(1)
+        {
+            text-align: right;
+        } 
+
+        div[data-testid="column"]:nth-of-type(2)
+        {
+            text-align: left;
+        } 
+    </style>
+    """,unsafe_allow_html=True
+)
+
+col1, col2, = st.columns(2,gap = "small")
+
+with col1:
+      # URL of the image
+      image_url = "https://img.icons8.com/small/256/new-post.png"
+      # Mail URL
+      mail_url = "mailto:yehudayu@gmail.com"
+      st.write("<a href='" + mail_url + "'><img src='" + image_url + "' width='50' height='50'></a>", unsafe_allow_html=True)
+
+
+with col2:
+      # URL of the image
+      image_url = "https://img.icons8.com/small/256/linkedin.png"
+      # LinkedIn URL
+      linkedin_url = "https://www.linkedin.com/in/yehuda-yungstein/"
+      st.write("<a href='" + linkedin_url + "'><img src='" + image_url + "' width='50' height='50'></a>", unsafe_allow_html=True)
