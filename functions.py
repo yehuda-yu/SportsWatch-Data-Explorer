@@ -556,9 +556,9 @@ def plot_correlation_heatmap(df, temperature_columns):
         selected_corr = correlations[selected_columns]
 
         # Plot heatmap
-        fig, ax = plt.subplots(figsize=(15, 8))
+        fig, ax = plt.subplots(figsize=(15, 15))
         sns.heatmap(selected_corr, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
-        ax.set_title(f"Spearman Correlation Heatmap for Temperature Columns and Numeric Columns (Correlations > 0.5)")
+        ax.set_title(f"Spearman Correlation Heatmap for Temperature (Correlations > 0.5)")
 
         # Display the plot in Streamlit
         st.pyplot(fig)
