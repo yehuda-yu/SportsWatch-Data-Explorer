@@ -25,6 +25,8 @@ plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = ['Arial'] + plt.rcParams['font.serif']
 
 # Create a Streamlit app
+# Set page icon
+st.set_page_config(page_icon="🥇")
 st.title("Garmin Running Visualization and Insights")
 
 # Section: File Upload
