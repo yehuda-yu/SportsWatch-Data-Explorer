@@ -639,13 +639,16 @@ def plot_correlation_temperature(df, temperature_column):
         # Filter correlations > 0.5
         high_correlations = correlations[correlations[temperature_column].abs() > 0.5]
 
-        # Plot heatmap
-        fig, ax = plt.subplots(figsize=(10, 8))
-        ax = sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
-        plt.title("Spearman Correlation Heatmap (Correlations > 0.5)")
-
-        # Display the heatmap
-        st.pyplot(fig)
+        # Create a heatmap using Plotly Express
+        fig = px.imshow(high_correlations, labels=dict(x="Columns", y="Columns", color="Correlation"),
+                        x=high_correlations.columns, y=high_correlations.columns,
+                        color_continuous_scale="coolwarm", zmin=-1, zmax=1)
+        
+        # Customize the heatmap appearance
+        fig.update_layout(title_text="Spearman Correlation Heatmap (Correlations > 0.5)")
+        
+        # Display the heatmap using st.plotly_chart
+        st.plotly_chart(fig)
 
     except Exception as e:
         print("An error occurred while processing the data:")
