@@ -533,13 +533,13 @@ def analyze_temperature_impact(df, max_temp_column, min_temp_column, pace_column
         st.error("An error occurred while processing the data:")
         st.error(str(e))
 
-def plot_correlation_temperature(df, temperature_column):
+def plot_correlation_heatmap(df, temperature_columns):
     """
-    Calculate Spearman correlations and plot a heatmap of correlations > 0.5 for the temperature column and numeric columns.
+    Calculate Spearman correlations and plot a heatmap of correlations > 0.5 for the temperature columns and numeric columns.
 
     Args:
         df (pandas.DataFrame): Input DataFrame containing the data.
-        temperature_column (str): Name of the temperature column.
+        temperature_columns (list): List of temperature column names.
     """
     try:
         # Filter numeric columns
@@ -548,20 +548,20 @@ def plot_correlation_temperature(df, temperature_column):
         # Calculate Spearman correlations
         correlations = df[numeric_columns].corr(method='spearman')
 
-        # Filter correlations > 0.5 for the temperature column
-        high_correlations = correlations[temperature_column].abs().sort_values(ascending=False)
+        # Filter correlations > 0.5 for the temperature columns
+        high_correlations = correlations[temperature_columns].abs().sort_values(ascending=False)
         high_correlations = high_correlations[high_correlations > 0.5]
 
         st.write(high_correlations)
 
-        # Create a DataFrame containing only the selected column and the columns with high correlations
-        selected_columns = [temperature_column] + high_correlations.index.tolist()
+        # Create a DataFrame containing selected columns and the columns with high correlations
+        selected_columns = temperature_columns + high_correlations.index.tolist()
         selected_corr = correlations[selected_columns]
 
         # Plot heatmap
         fig, ax = plt.subplots(figsize=(10, 6))
         sns.heatmap(selected_corr, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
-        ax.set_title(f"Spearman Correlation Heatmap for {temperature_column} (Correlations > 0.5)")
+        ax.set_title(f"Spearman Correlation Heatmap for Temperature Columns and Numeric Columns (Correlations > 0.5)")
 
         # Display the plot in Streamlit
         st.pyplot(fig)
