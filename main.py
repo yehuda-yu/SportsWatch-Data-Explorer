@@ -143,7 +143,7 @@ if uploaded_file is not None:
         
         #plot heatmap of correlations 
         fig = functions.plot_correlation_temperature(df, 'Max Temp')
-        st.plotly_chart(fig)
+        st.pyplot(fig)
 
     
   
