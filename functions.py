@@ -20,6 +20,7 @@ sns.set_theme(style="white",font_scale = 1.5,palette = color_palette)
 # Set the font to Times new roman
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = ['Arial'] + plt.rcParams['font.serif']
+plt.switch_backend("Agg")
 
 def clean_running_data(df):
     """
@@ -548,7 +549,6 @@ def plot_correlation_temperature(df, temperature_column):
         high_correlations = correlations[correlations[temperature_column].abs() > 0.5]
 
         # Plot heatmap
-                # Create the bar plot
         fig, ax = plt.subplots(figsize=(10, 6))
         sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
         ax.set_title("Spearman Correlation Heatmap (Correlations > 0.5)")
