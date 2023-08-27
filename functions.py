@@ -533,17 +533,20 @@ def analyze_temperature_impact(df, max_temp_column, min_temp_column, pace_column
         st.error("An error occurred while processing the data:")
         st.error(str(e))
 
-def plot_correlation_temperature(df, temperature_column):
+def plot_correlation_numeric(df, temperature_column):
     """
-    Calculate Spearman correlations and plot a heatmap of correlations > 0.5 for the temperature column.
+    Calculate Spearman correlations and plot a heatmap of correlations > 0.5 for the temperature column and numeric columns.
 
     Args:
         df (pandas.DataFrame): Input DataFrame containing the data.
         temperature_column (str): Name of the temperature column.
     """
     try:
+        # Filter numeric columns
+        numeric_columns = df.select_dtypes(include=['float64', 'int64']).columns
+
         # Calculate Spearman correlations
-        correlations = df.corr(method='spearman')
+        correlations = df[numeric_columns].corr(method='spearman')
 
         # Filter correlations > 0.5 for the temperature column
         high_correlations = correlations[temperature_column].abs().sort_values(ascending=False)
