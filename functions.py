@@ -345,60 +345,6 @@ def compare_day_night_performance(df, parameter, night_threshold = "19:00"):
     except Exception as e:
         st.error(f"An error occurred while comparing day-night performance: {e}")
 
-def find_highest_performance_hour(df, parameter):
-    """
-    Find the hour when the distance from the overall average is the highest and return the hour and value.
-    Also, plot a bar plot of the parameter and hours.
-
-    Args:
-        df (pandas.DataFrame): Input DataFrame containing the running data.
-        parameter (str): Name of the parameter to analyze.
-
-    Returns:
-        highest_distance_hour (int): Hour when the distance from the overall average is the highest.
-        highest_distance_value (float): Average value of the parameter for the hour.
-        lowest_distance_hour (int): Hour when the distance from the overall average is the lowest.
-        lowest_distance_value (float): Average value of the parameter for the hour.
-    """
-    try:
-        # Create a new DataFrame with the average of the parameter according to each hour
-        hourly_avg_df = df.groupby('Hour')[parameter].mean().reset_index()
-        
-        # Calculate the overall average of the parameter
-        overall_avg = df[parameter].mean()
-        
-        # Calculate the distance from the overall average for each hour
-        hourly_avg_df['Distance from Overall Average'] = abs(hourly_avg_df[parameter] - overall_avg)
-        
-        # Find the hour with the highest distance from the overall average
-        highest_distance_hour = hourly_avg_df.loc[hourly_avg_df['Distance from Overall Average'].idxmax(), 'Hour']
-        highest_distance_value = hourly_avg_df.loc[hourly_avg_df['Distance from Overall Average'].idxmax(), parameter]
-        
-        # Find the hour with the lowest distance from the overall average
-        lowest_distance_hour = hourly_avg_df.loc[hourly_avg_df['Distance from Overall Average'].idxmin(), 'Hour']
-        lowest_distance_value = hourly_avg_df.loc[hourly_avg_df['Distance from Overall Average'].idxmin(), parameter]
-        
-        # Display the results
-        st.write(f"The hour when the distance from the overall average is the highest is: {highest_distance_hour}")
-        st.write(f"The average value for this hour is: {highest_distance_value} while the overall average is: {overall_avg}")
-        st.write(f"The hour when the distance from the overall average is the lowest is: {lowest_distance_hour}")
-        st.write(f"The average value for this hour is: {lowest_distance_value} while the overall average is: {overall_avg}")
-        
-        # Plot a bar plot of the parameter and hours
-        fig, ax = plt.subplots(figsize=(10, 6))
-        ax.bar(hourly_avg_df['Hour'], hourly_avg_df[parameter])
-        ax.set_xlabel('Hour')
-        ax.set_ylabel(parameter)
-        ax.set_title('Average ' + parameter + ' by Hour')
-        
-        # Display the plot in Streamlit
-        st.pyplot(fig)
-        
-        return highest_distance_hour, highest_distance_value, lowest_distance_hour, lowest_distance_value    
-    
-    except Exception as e:
-        st.error(f"An error occurred while finding the highest performance hour: {e}")
-        return None, None, None, None
 
 def check_heart_rate_normal(average_rate, max_rate, age, gender):
         
@@ -677,3 +623,61 @@ def identify_personal_records(df):
     except Exception as e:
         st.error("An error occurred while processing the data:")
         st.error(str(e))
+
+
+# Draft
+
+def find_highest_performance_hour(df, parameter):
+    """
+    Find the hour when the distance from the overall average is the highest and return the hour and value.
+    Also, plot a bar plot of the parameter and hours.
+
+    Args:
+        df (pandas.DataFrame): Input DataFrame containing the running data.
+        parameter (str): Name of the parameter to analyze.
+
+    Returns:
+        highest_distance_hour (int): Hour when the distance from the overall average is the highest.
+        highest_distance_value (float): Average value of the parameter for the hour.
+        lowest_distance_hour (int): Hour when the distance from the overall average is the lowest.
+        lowest_distance_value (float): Average value of the parameter for the hour.
+    """
+    try:
+        # Create a new DataFrame with the average of the parameter according to each hour
+        hourly_avg_df = df.groupby('Hour')[parameter].mean().reset_index()
+        
+        # Calculate the overall average of the parameter
+        overall_avg = df[parameter].mean()
+        
+        # Calculate the distance from the overall average for each hour
+        hourly_avg_df['Distance from Overall Average'] = abs(hourly_avg_df[parameter] - overall_avg)
+        
+        # Find the hour with the highest distance from the overall average
+        highest_distance_hour = hourly_avg_df.loc[hourly_avg_df['Distance from Overall Average'].idxmax(), 'Hour']
+        highest_distance_value = hourly_avg_df.loc[hourly_avg_df['Distance from Overall Average'].idxmax(), parameter]
+        
+        # Find the hour with the lowest distance from the overall average
+        lowest_distance_hour = hourly_avg_df.loc[hourly_avg_df['Distance from Overall Average'].idxmin(), 'Hour']
+        lowest_distance_value = hourly_avg_df.loc[hourly_avg_df['Distance from Overall Average'].idxmin(), parameter]
+        
+        # Display the results
+        st.write(f"The hour when the distance from the overall average is the highest is: {highest_distance_hour}")
+        st.write(f"The average value for this hour is: {highest_distance_value} while the overall average is: {overall_avg}")
+        st.write(f"The hour when the distance from the overall average is the lowest is: {lowest_distance_hour}")
+        st.write(f"The average value for this hour is: {lowest_distance_value} while the overall average is: {overall_avg}")
+        
+        # Plot a bar plot of the parameter and hours
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.bar(hourly_avg_df['Hour'], hourly_avg_df[parameter])
+        ax.set_xlabel('Hour')
+        ax.set_ylabel(parameter)
+        ax.set_title('Average ' + parameter + ' by Hour')
+        
+        # Display the plot in Streamlit
+        st.pyplot(fig)
+        
+        return highest_distance_hour, highest_distance_value, lowest_distance_hour, lowest_distance_value    
+    
+    except Exception as e:
+        st.error(f"An error occurred while finding the highest performance hour: {e}")
+        return None, None, None, None
