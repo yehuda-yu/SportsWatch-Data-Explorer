@@ -51,8 +51,6 @@ if uploaded_file is not None:
     
     
     # Define the parameter columns for line charts
-    st.write(df.columns)
-
     columns = df[['Distance', 'Calories', 'Avg HR', 'Max HR', 'Aerobic TE', 'Avg Run Cadence',
        'Max Run Cadence', 'Avg Pace', 'Best Pace', 'Total Ascent',
        'Total Descent', 'Avg Stride Length', 'Avg Vertical Ratio',
@@ -60,7 +58,7 @@ if uploaded_file is not None:
        'Training Stress Score®', 'Avg Power', 'Max Power', 'Min Temp',
        'Surface Interval', 'Max Temp', 'Elapsed Time', 'Min Elevation',
        'Max Elevation']].columns
-    parameter = st.selectbox("Select a parameter to visualize", columns,4)
+    parameter = st.selectbox("Select a parameter to visualize", columns)
 
     # Display line charts for monthly averages of selected parameters
     functions.get_chart(df, parameter)
