@@ -561,7 +561,7 @@ def plot_correlation_heatmap(df, temperature_columns):
         ax.set_title(f"Spearman Correlation Heatmap for Temperature Columns and Numeric Columns (Correlations > 0.5)")
 
         # Display the plot in Streamlit
-        # st.pyplot(fig)
+        st.pyplot(fig)
 
     except Exception as e:
         st.error("An error occurred while processing the data:")
