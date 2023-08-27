@@ -551,6 +551,9 @@ def plot_correlation_heatmap(df, temperature_columns):
         # Filter correlations > 0.5 for the temperature columns
         high_correlations = correlations[temperature_columns].abs().max() > 0.5
 
+         # Drop duplicate columns
+        high_correlations = high_correlations.loc[:, ~high_correlations.columns.duplicated()]
+
         # Create a DataFrame containing selected columns and the columns with high correlations
         selected_columns = temperature_columns + high_correlations.index.tolist()
         selected_corr = correlations[selected_columns]
