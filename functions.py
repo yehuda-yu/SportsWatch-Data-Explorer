@@ -551,8 +551,6 @@ def plot_correlation_heatmap(df, temperature_columns):
         # Filter correlations > 0.5 for the temperature columns
         high_correlations = correlations[temperature_columns].abs().max() > 0.5
 
-        st.write(high_correlations)
-
         # Create a DataFrame containing selected columns and the columns with high correlations
         selected_columns = temperature_columns + high_correlations.index.tolist()
         selected_corr = correlations[selected_columns]
@@ -563,7 +561,7 @@ def plot_correlation_heatmap(df, temperature_columns):
         ax.set_title(f"Spearman Correlation Heatmap for Temperature Columns and Numeric Columns (Correlations > 0.5)")
 
         # Display the plot in Streamlit
-        st.pyplot(fig)
+        # st.pyplot(fig)
 
     except Exception as e:
         st.error("An error occurred while processing the data:")
