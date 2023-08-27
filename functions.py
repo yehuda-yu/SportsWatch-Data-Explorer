@@ -641,7 +641,7 @@ def plot_correlation_temperature(df, temperature_column):
 
         # Plot heatmap
         fig, ax = plt.subplots(figsize=(10, 8))
-        sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
+        ax = sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
         plt.title("Spearman Correlation Heatmap (Correlations > 0.5)")
 
         # Display the heatmap
