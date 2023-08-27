@@ -61,7 +61,8 @@ if uploaded_file is not None:
     parameter = st.selectbox("Select a parameter to visualize", columns)
 
     # Display line charts for monthly averages of selected parameters
-    functions.get_chart(df, parameter)
+    fig = functions.get_chart(df, parameter)
+    st.plotly_chart(fig)
     
     
     st.markdown("""### Select your own visualization""")
