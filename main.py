@@ -153,4 +153,4 @@ if uploaded_file is not None:
     # Records Expander
     with st.expander("Check Your Records"):
         st.subheader("Records")
-        functions.identify_personal_records(df)"
+        functions.identify_personal_records(df)
