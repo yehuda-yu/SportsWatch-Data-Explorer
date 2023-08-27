@@ -531,14 +531,23 @@ def analyze_activity_duration(df, duration_column):
         df_minutes[duration_column] = pd.to_timedelta(df_minutes[duration_column])
         df_minutes[duration_column] = df_minutes[duration_column].dt.total_seconds() / 60
 
+        # Calculate the mean duration
+        mean_duration = df_minutes[duration_column].mean()
+
         # Create a histogram using Plotly
-        fig = px.histogram(df_minutes, x=duration_column, nbins=20, labels={'x': 'Activity Duration (minutes)', 'y': 'Frequency'},
+        fig = px.histogram(df_minutes, x=duration_column, nbins=20,
+                           labels={'x': 'Activity Duration (minutes)', 'y': 'Frequency'},
                            title='Distribution of Activity Durations',)
+        
+        # Add a vertical line for the mean duration
+        fig.add_vline(x=mean_duration, line_dash="dash", line_color="red",
+                      annotation_text=f"Mean: {mean_duration:.2f} min", annotation_position="top")
+
         # Set the color of the histogram
         fig.update_traces(marker_color='#21b0fe')
         # Set the layout of the figure
         fig.update_layout(showlegend=False)
-      
+
         # Display the histogram using st.plotly_chart
         st.plotly_chart(fig)
         
