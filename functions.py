@@ -535,7 +535,7 @@ def analyze_temperature_impact(df, max_temp_column, min_temp_column, pace_column
 
 def plot_correlation_temperature(df, temperature_column):
     """
-    Calculate Spearman correlations and plot a heatmap of correlations > 0.5.
+    Calculate Spearman correlations and plot a heatmap of correlations > 0.5 for the temperature column.
 
     Args:
         df (pandas.DataFrame): Input DataFrame containing the data.
@@ -545,22 +545,27 @@ def plot_correlation_temperature(df, temperature_column):
         # Calculate Spearman correlations
         correlations = df.corr(method='spearman')
 
-        # Filter correlations > 0.5
-        high_correlations = correlations[correlations[temperature_column].abs() > 0.5]
+        # Filter correlations > 0.5 for the temperature column
+        high_correlations = correlations[temperature_column].abs().sort_values(ascending=False)
+        high_correlations = high_correlations[high_correlations > 0.5]
 
         st.write(high_correlations)
 
+        # Create a DataFrame containing only the selected column and the columns with high correlations
+        selected_columns = [temperature_column] + high_correlations.index.tolist()
+        selected_corr = correlations[selected_columns]
+
         # Plot heatmap
         fig, ax = plt.subplots(figsize=(10, 6))
-        sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
-        ax.set_title("Spearman Correlation Heatmap (Correlations > 0.5)")
+        sns.heatmap(selected_corr, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
+        ax.set_title(f"Spearman Correlation Heatmap for {temperature_column} (Correlations > 0.5)")
 
         # Display the plot in Streamlit
         st.pyplot(fig)
 
     except Exception as e:
-        print("An error occurred while processing the data:")
-        print(str(e))
+        st.error("An error occurred while processing the data:")
+        st.error(str(e))
         
 def highlight_personal_records(df,val, record_column):
     """
