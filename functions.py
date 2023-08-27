@@ -549,8 +549,7 @@ def plot_correlation_heatmap(df, temperature_columns):
         correlations = df[numeric_columns].corr(method='spearman')
 
         # Filter correlations > 0.5 for the temperature columns
-        high_correlations = correlations[temperature_columns].abs().sort_values(ascending=False)
-        high_correlations = high_correlations[high_correlations > 0.5]
+        high_correlations = correlations[temperature_columns].abs().max() > 0.5
 
         st.write(high_correlations)
 
