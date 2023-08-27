@@ -51,15 +51,12 @@ if uploaded_file is not None:
     
     
     # Define the parameter columns for line charts
-    columns = df[['Distance', 'Calories',
-       'Time', 'Avg HR', 'Max HR', 'Aerobic TE', 'Avg Run Cadence',
+    columns = df[['Distance', 'Calories', 'Avg HR', 'Max HR', 'Aerobic TE', 'Avg Run Cadence',
        'Max Run Cadence', 'Avg Pace', 'Best Pace', 'Total Ascent',
        'Total Descent', 'Avg Stride Length', 'Avg Vertical Ratio',
        'Avg Vertical Oscillation', 'Avg Ground Contact Time',
-       'Training Stress Score®', 'Avg Power', 'Max Power', 'Grit', 'Flow',
-       'Avg. Swolf', 'Avg Stroke Rate', 'Total Reps', 'Dive Time', 'Min Temp',
-       'Surface Interval', 'Decompression', 'Best Lap Time', 'Number of Laps',
-       'Max Temp', 'Moving Time', 'Elapsed Time', 'Min Elevation',
+       'Training Stress Score®', 'Avg Power', 'Max Power', 'Min Temp',
+       'Surface Interval', 'Max Temp', 'Elapsed Time', 'Min Elevation',
        'Max Elevation']].columns
     parameter = st.selectbox("Select a parameter to visualize", columns,4)
 
