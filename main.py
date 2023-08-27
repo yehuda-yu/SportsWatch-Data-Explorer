@@ -142,8 +142,8 @@ if uploaded_file is not None:
         st.subheader("What the correlation between temperature and your performance")
         
         #plot heatmap of correlations 
-        fig = functions.plot_correlation_temperature(df, 'Max Temp')
-        st.pyplot(fig)
+        functions.plot_correlation_temperature(df, 'Max Temp')
+        
 
     
   
