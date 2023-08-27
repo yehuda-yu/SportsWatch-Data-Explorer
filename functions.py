@@ -558,13 +558,19 @@ def plot_correlation_heatmap(df, temperature_columns):
         # Drop duplicate columns
         selected_corr = selected_corr.loc[:, ~selected_corr.columns.duplicated()]
 
-        # Plot heatmap
-        fig, ax = plt.subplots(figsize=(15, 15))
-        sns.heatmap(selected_corr, annot=True, cmap='coolwarm_r',vmin=-1,vmax=1, fmt=".2f", ax=ax)
-        ax.set_title(f"Spearman Correlation Heatmap for Temperature (Correlations > 0.5)")
+        # Filter correlations with absolute value > 0.5
+        selected_corr = selected_corr[(selected_corr.abs() > 0.5).any(axis=1)]
 
-        # Display the plot in Streamlit
-        st.pyplot(fig)
+        # Plot heatmap if there are significant correlations
+        if not selected_corr.empty:
+            fig, ax = plt.subplots(figsize=(15, 15))
+            sns.heatmap(selected_corr, annot=True, cmap='coolwarm_r', vmin=-1, vmax=1, fmt=".2f", ax=ax)
+            ax.set_title(f"Spearman Correlation Heatmap for Temperature (Correlations > 0.5)")
+
+            # Display the plot in Streamlit
+            st.pyplot(fig)
+        else:
+            st.write("There is no significant correlation between performance and temperature columns.")
 
     except Exception as e:
         st.error("An error occurred while processing the data:")
