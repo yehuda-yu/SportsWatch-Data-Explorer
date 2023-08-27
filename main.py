@@ -140,13 +140,12 @@ if uploaded_file is not None:
         # check performance in different temperatures
         functions.analyze_temperature_impact(df, 'Max Temp', 'Min Temp', 'Avg Pace', 'Avg HR', 'Max HR')
         # Check correlations
-        st.subheader("What the correlation between temperature and your performance")
+        st.subheader("Correlation Heatmap off Temperature")
+        st.write("display a correlation heatmap for the selected temperature column and highly correlated columns.")
         
         #plot heatmap of correlations 
         functions.plot_correlation_temperature(df, 'Max Temp')
         
-
-    
   
     # Records Expander
     with st.expander("Check Your Records"):
