@@ -55,9 +55,102 @@ if use_sample_data or uploaded_file is not None:
     st.markdown("---")
     st.subheader('3. Visualizations')
     
-    # ... (rest of the code remains the same)
+   # Define the parameter columns for line charts
+    columns = df[['Distance', 'Calories', 'Avg HR', 'Max HR', 'Aerobic TE', 'Avg Run Cadence',
+       'Max Run Cadence', 'Avg Pace', 'Best Pace', 'Total Ascent',
+       'Total Descent', 'Avg Stride Length', 'Avg Vertical Ratio',
+       'Avg Vertical Oscillation', 'Avg Ground Contact Time',
+       'Training Stress Score®', 'Avg Power', 'Max Power', 'Min Temp',
+       'Surface Interval', 'Max Temp', 'Elapsed Time', 'Min Elevation',
+       'Max Elevation']].columns
+    parameter = st.selectbox("Select a parameter to visualize", columns)
+
+    # Display line charts for monthly averages of selected parameters
+    fig = functions.get_chart(df, parameter)
+    st.plotly_chart(fig)
     
+    
+    st.markdown("""### Select your own visualization""")
+    # Select column name
+    column_name = st.selectbox("Select a parameter to visualize", df.columns,4)
+
+    # Define interval options with user-friendly labels
+    interval_options = {
+        'Weekly': 'W',
+        'Monthly': 'M',
+        '3-Months': '3M',
+        'Semi-Annual': '6M',
+        'Annual': 'A'
+    }
+
+    # Select interval using user-friendly labels
+    interval_label = st.selectbox("Select an interval of time for visualization", list(interval_options.keys()))
+
+    # Retrieve corresponding interval value from the options dictionary
+    interval = interval_options[interval_label]
+
+    # Select calculation type
+    calculation = st.selectbox("Select a calculation for visualization", ['average', 'sum', 'maximum', 'minimum'])
+
+    # Plot the interval statistics if the button is clicked
+    if st.button("Plot Visualizations"):
+        st.subheader("Interval Statistics")
+        functions.plot_interval_statistics(df, column_name, interval, calculation)
+
+        st.subheader("Distribution with Average")
+        functions.plot_distribution_with_average(df, column_name)
+
+        st.subheader("Day vs. Night Performance")
+        functions.compare_day_night_performance(df, column_name)
+
+# Section: Report
+st.markdown("""---""")
+st.subheader('4. Report - Analysis & Recommendations')
+if uploaded_file is not None:
+    
+    # Heart Rate Analysis Expander
+    with st.expander("Check Heart Rates"):
+        st.write("Enter your details below:")
+        age = st.slider("Age", min_value=20, max_value=70, step=5)
+        gender = st.selectbox("Gender", ['Male', 'Female'])
+
+        # Calculate heart rate statistics for the last year and last month
+        average_last_year = round(df[df['Date'].dt.year == df['Date'].dt.year.max()]['Max HR'].mean(), 1)
+        average_last_month = round(df[df['Date'].dt.month == df['Date'].dt.month.max()]['Max HR'].mean(), 1)
+        max_last_year = round(df[df['Date'].dt.year == df['Date'].dt.year.max()]['Max HR'].mean(), 1)
+        max_last_month = round(df[df['Date'].dt.month == df['Date'].dt.month.max()]['Max HR'].mean(), 1)
+    
+        # Check button for heart rate analysis
+        if st.button("Check Heart Rates"):
+            st.subheader("Heart Rate Analysis Results")
+            st.write("Your last year heart rates:")
+            functions.check_heart_rate_normal(average_last_year, max_last_year, age, gender)
+
+            st.write("Your last month heart rates:")
+            functions.check_heart_rate_normal(average_last_month, max_last_month, age, gender)
+
+    # Duration Distribution Expander
+    with st.expander("Check Stride and Cadence"):
+        st.subheader("Stride and Cadence")
+        functions.analyse_Cadence_Stride(df)
+
+    # Duration Distribution Expander
+    with st.expander("Check Duration"):
+        st.subheader("Duration")
+        functions.analyze_activity_duration(df,'Time')
+        
+    # Duration Distribution Expander
+    with st.expander("Check Temperature Effect"):
+        # check performance in different temperatures
+        functions.analyze_temperature_impact(df, 'Max Temp', 'Min Temp', 'Avg Pace', 'Avg HR', 'Max HR')
+        # Check correlations
+        st.subheader("Correlation Heatmap off Temperature")
+        st.write("display a correlation heatmap for the selected temperature column and highly correlated columns.")
+        
+        #plot heatmap of correlations 
+        functions.plot_correlation_heatmap(df, ['Max Temp', 'Min Temp'])    
+  
     # Records Expander
     with st.expander("Check Your Records"):
         st.subheader("Records")
-        functions.identify_personal_records(df)
+        functions.identify_personal_records(df)"
