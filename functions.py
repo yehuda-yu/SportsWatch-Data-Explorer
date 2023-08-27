@@ -640,10 +640,12 @@ def plot_correlation_temperature(df, temperature_column):
         high_correlations = correlations[correlations[temperature_column].abs() > 0.5]
 
         # Plot heatmap
-        plt.figure(figsize=(10, 8))
-        sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f")
+        fig, ax = plt.subplots(figsize=(10, 8))
+        sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f", ax=ax)
         plt.title("Spearman Correlation Heatmap (Correlations > 0.5)")
-        plt.show()
+
+        # Display the heatmap
+        st.pyplot(fig)
 
     except Exception as e:
         print("An error occurred while processing the data:")
