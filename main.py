@@ -106,7 +106,7 @@ if use_sample_data or uploaded_file is not None:
 # Section: Report
 st.markdown("""---""")
 st.subheader('4. Report - Analysis & Recommendations')
-if uploaded_file is not None:
+if use_sample_data or uploaded_file is not None:
     
     # Heart Rate Analysis Expander
     with st.expander("Check Heart Rates"):
