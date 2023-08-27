@@ -624,7 +624,31 @@ def analyze_temperature_impact(df, max_temp_column, min_temp_column, pace_column
         st.error("An error occurred while processing the data:")
         st.error(str(e))
 
+def plot_correlation_temperature(df, temperature_column):
+    """
+    Calculate Spearman correlations and plot a heatmap of correlations > 0.5.
 
+    Args:
+        df (pandas.DataFrame): Input DataFrame containing the data.
+        temperature_column (str): Name of the temperature column.
+    """
+    try:
+        # Calculate Spearman correlations
+        correlations = df.corr(method='spearman')
+
+        # Filter correlations > 0.5
+        high_correlations = correlations[correlations[temperature_column].abs() > 0.5]
+
+        # Plot heatmap
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(high_correlations, annot=True, cmap='coolwarm', center=0, fmt=".2f")
+        plt.title("Spearman Correlation Heatmap (Correlations > 0.5)")
+        plt.show()
+
+    except Exception as e:
+        print("An error occurred while processing the data:")
+        print(str(e))
+        
 def highlight_personal_records(df,val, record_column):
     """
     Highlight personal records in the DataFrame.
