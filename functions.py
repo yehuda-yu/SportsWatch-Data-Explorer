@@ -533,7 +533,6 @@ def analyze_activity_duration(df, duration_column):
 
         # Calculate the mean and standard deviation
         mean_duration = df_minutes[duration_column].mean()
-        std_duration = df_minutes[duration_column].std()
 
         # Create a histogram using Plotly
         fig = px.histogram(df_minutes, x=duration_column, nbins=20,
@@ -541,17 +540,8 @@ def analyze_activity_duration(df, duration_column):
                            title='Distribution of Activity Durations',)
         
         # Add a vertical line for the mean duration
-        fig.add_vline(x=mean_duration, line_dash="dash", line_color="red",
+        fig.add_vline(x=mean_duration, line_dash="dash", line_color="#fed700",
                       annotation_text=f"Mean: {mean_duration:.2f} min", annotation_position="top")
-        
-        # Add a shaded region for the standard deviation range
-        fig.add_shape(
-            type="rect",
-            x0=mean_duration - std_duration, y0=0,
-            x1=mean_duration + std_duration, y1=1,
-            fillcolor="rgba(128, 128, 128, 0.3)",
-            line=dict(width=0),
-        )
 
         # Set the color of the histogram
         fig.update_traces(marker_color='#21b0fe')
